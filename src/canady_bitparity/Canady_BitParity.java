@@ -6,13 +6,13 @@ public class Canady_BitParity {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-    static Scanner scan = new Scanner(System.in);
+    static Scanner s = new Scanner(System.in);
     static ArrayList<int[]> phrase = new ArrayList();
     static ArrayList<int[]> check = new ArrayList();
 
     public static void main(String[] args) {
         System.out.println("Would you like to A) create or B) insert a parity?");
-        String input = scan.nextLine().toUpperCase();
+        String input = s.nextLine().toUpperCase();
         if (input.equals("A")) {
             init();
             create();
@@ -51,10 +51,10 @@ public class Canady_BitParity {
 
     public static void init() {
         System.out.println("How many characters are there?");
-        int chars = scan.nextInt();
+        int chars = s.nextInt();
         for (int i = 0; i < chars; i++) {
             System.out.println("What is the ASCII value for character " + (i + 1) + "?");
-            int value = scan.nextInt();
+            int value = s.nextInt();
             int[] letterParity = new int[11];
             letterParity[10] = value % 10;
             value /= 10;
@@ -104,10 +104,10 @@ public class Canady_BitParity {
 
     public static void insert() {
         System.out.println("How many characters are there?");
-        int chars = scan.nextInt();
+        int chars = s.nextInt();
         for (int i = 0; i < chars; i++) {
             System.out.println("What is the parity value for character " + (i + 1) + "?");
-            int value = scan.nextInt();
+            int value = s.nextInt();
             int[] letterParity = new int[11];
             letterParity[10] = value % 10;
             value /= 10;
@@ -168,60 +168,60 @@ public class Canady_BitParity {
 
         for (int i = 0; i < phrase.size(); i++) {
             int wrong = 0;
-            ArrayList<Integer> bits = new ArrayList<Integer>();
+            ArrayList<Integer> bbb = new ArrayList<Integer>();
             //Check bit 1
             if (phrase.get(i)[0] != check.get(i)[0]) {
                 wrong++;
-                bits.add(0);
+                bbb.add(0);
             }
             //Check bit 2
             if (phrase.get(i)[1] != check.get(i)[1]) {
                 wrong++;
-                bits.add(1);
+                bbb.add(1);
             }
             //Check bit 4
             if (phrase.get(i)[3] != check.get(i)[3]) {
                 wrong++;
-                bits.add(3);
+                bbb.add(3);
             }
             //Check bit 8
             if (phrase.get(i)[7] != check.get(i)[7]) {
                 wrong++;
-                bits.add(7);
+                bbb.add(7);
             }
-            ArrayList<Integer> wrongbits = new ArrayList<Integer>();
-            ArrayList<Integer> checkbits = new ArrayList<Integer>();
-            checkbits.add(0);
-            checkbits.add(1);
-            checkbits.add(3);
-            checkbits.add(7);
+            ArrayList<Integer> wrongs = new ArrayList<Integer>();
+            ArrayList<Integer> checks = new ArrayList<Integer>();
+            checks.add(0);
+            checks.add(1);
+            checks.add(3);
+            checks.add(7);
             if (wrong == 0) {
                 print(phrase.get(i));
             } else if (wrong == 1) {
-                print(phrase.get(i), bits);
+                print(phrase.get(i), bbb);
             } else {
-                if (bits.contains(0) && bits.contains(1)) {
-                    wrongbits.add(2);
+                if (bbb.contains(0) && bbb.contains(1)) {
+                    wrongs.add(2);
                 }
-                if (bits.contains(0) && bits.contains(3)) {
-                    wrongbits.add(4);
+                if (bbb.contains(0) && bbb.contains(3)) {
+                    wrongs.add(4);
                 }
-                if (bits.contains(1) && bits.contains(3)) {
-                    wrongbits.add(5);
+                if (bbb.contains(1) && bbb.contains(3)) {
+                    wrongs.add(5);
                 }
-                if (bits.contains(0) && bits.contains(1) && bits.contains(3)) {
-                    wrongbits.add(6);
+                if (bbb.contains(0) && bbb.contains(1) && bbb.contains(3)) {
+                    wrongs.add(6);
                 }
-                if (bits.contains(0) && bits.contains(7)) {
-                    wrongbits.add(8);
+                if (bbb.contains(0) && bbb.contains(7)) {
+                    wrongs.add(8);
                 }
-                if (bits.contains(1) && bits.contains(7)) {
-                    wrongbits.add(9);
+                if (bbb.contains(1) && bbb.contains(7)) {
+                    wrongs.add(9);
                 }
-                if (bits.contains(0) && bits.contains(1) && bits.contains(7)) {
-                    wrongbits.add(10);
+                if (bbb.contains(0) && bbb.contains(1) && bbb.contains(7)) {
+                    wrongs.add(10);
                 }
-                print(phrase.get(i), wrongbits);
+                print(phrase.get(i), wrongs);
             }
         }
     }
